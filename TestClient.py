@@ -151,9 +151,12 @@ if loadjson!=None:
     nwrong=input()
     logger.info("user inputed:%d errors"%nwrong)
     for i in range(nwrong):
-        answer[i][1]=answer[i][1]-1
-        if answer[i][1]==0:
-            answer[i][1]=2
+        if answer[i][0]=='choice':
+            answer[i][1]=answer[i][1]-1
+            if answer[i][1]==0:
+                answer[i][1]=2
+        else:
+            answer[i][1]=""
 else:
     # answer questions
     try:
