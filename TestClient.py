@@ -12,17 +12,20 @@ import json
 import logging
 import logging.handlers
            
-def damn_print(text):
+
+def ascii_print(text):
+    temp=""
+    for i in text:
+        if ord(i)<128 and ord(i)!=0:
+            temp+=i
+    print temp
+
+
+def safe_print(text):
     try:
         print text
     except:
-        try:
-            print text.replace(u'\u201a','')
-        except:
-            try:
-                print text.encode('utf-8','ignore')
-            except:
-                pass
+        ascii_print(text)
 
 def input_answer(qdata):
     answer=[]
@@ -35,17 +38,17 @@ def input_answer(qdata):
         # print section script
         for script in item["transcript"]:
             m = re.findall(r'[ub]>([^<^>.]+)</', script)
-            damn_print(script)
+            safe_print(script)
         # print question and input answer
         for q in item["question"]:
             print "\nNO.%d"%n
             n+=1
             # print question script
             for script in q["transcript"]:
-                damn_print(script)
+                safe_print(script)
             # print options
             for op in q["options"]:
-                damn_print("%s. %s"%(op[0],op[1]))
+                safe_print("%s. %s"%(op[0],op[1]))
             # input answer
             if q["type"]=='choice':
                 # choice
