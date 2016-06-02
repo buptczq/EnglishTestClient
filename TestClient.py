@@ -1,9 +1,5 @@
 #!/usr/bin/env python 
 #coding:utf-8
-"""
-A fake TestClient
-By ZPCCZQ
-"""
 import os
 import sys
 import requests
@@ -65,13 +61,16 @@ def input_answer(qdata):
             else:
                 # text
                 print "Input the word in <u><b>_____</b></u>(ENTER to skip):"
-                print m[0]
-                temp_in=raw_input()
-                if temp_in=="":
-                    answer.append((q["type"],m[0]))
+                if len(m)>0:
+                    print m[0]
+                    temp_in=raw_input()
+                    if temp_in=="":
+                        answer.append((q["type"],m[0]))
+                    else:
+                        answer.append((q["type"],temp_in))
+                    m=m[1:]
                 else:
                     answer.append((q["type"],raw_input()))
-                m=m[1:]
     return answer
 
 
